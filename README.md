@@ -1,2 +1,2 @@
-**Sup, Welcome to Anime Rec**\n
+**Sup, Welcome to Anime Rec**       
 It is teh greatness of nothing.
