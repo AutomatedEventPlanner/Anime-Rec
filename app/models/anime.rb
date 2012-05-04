@@ -3,8 +3,8 @@ class Anime < ActiveRecord::Base
 
   validates :name, presence: true, length: { maximum: 200 }
   validates :description, presence: true
-  validates :rating, presence: true
-  validates :tags, presence: true
+  validates :rating, presence: true, length: { maximum: 3 }
+  validates :tags, presence: true, length: { maximum: 200 }
 
   def recScore(interests)
      if (self.approved && !interests.nil? && !interests.empty?)
