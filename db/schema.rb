@@ -13,6 +13,19 @@
 
 ActiveRecord::Schema.define(:version => 20120504010836) do
 
+  create_table "animes", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.boolean  "approved",    :default => false
+    t.integer  "rating"
+    t.string   "tags"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
+  add_index "animes", ["name"], :name => "index_animes_on_name"
+  add_index "animes", ["tags"], :name => "index_animes_on_tags"
+
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"

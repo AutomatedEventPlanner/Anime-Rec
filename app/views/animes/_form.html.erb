@@ -1,0 +1,19 @@
+<%= form_for(@anime) do |f| %>
+   <%= f.label :name, "Name of Anime" %>
+   <%= f.text_field :name %>
+
+   <%= f.label :description, "Description" %>
+   <%= f.text_area :description %>
+
+   <%= f.label :rating, "Rating (0-100 with 0 being horrible and 100 being awesome" %>
+   <%= f.text_field :rating %>
+
+   <%= f.label :tags, "Genres this anime falls under (separate each genre with a |)" %>
+   <%= f.text_field :tags %>
+
+   <% if @anime.name.nil? %>
+      <%= f.submit "Add New Anime", class: "btn btn-primary" %>
+   <% else %>
+      <%= f.submit "Update Anime", class: "btn btn-primary" %>
+   <% end %>
+<% end %>
