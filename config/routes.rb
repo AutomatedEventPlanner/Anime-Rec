@@ -5,7 +5,11 @@ AnimeRec::Application.routes.draw do
   get "static_pages/help"
   match 'help', :to => 'static_pages#help'
 
+  get "static_pages/recommend"
+
   resources :users
+
+  resources :animes
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

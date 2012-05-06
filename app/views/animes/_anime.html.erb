@@ -1,0 +1,6 @@
+<% if anime.approved %>
+   <li>
+       <%= link_to anime.name, anime %>
+       <%= button_to "Delete", anime, method: :delete, confirm: "Are you sure?", form_class: "btn btn-danger" %>
+   </li> 
+<% end %>

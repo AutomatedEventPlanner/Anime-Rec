@@ -1,2 +1,16 @@
-<h1>Nothing</h1>
-<p>There's nothing here. Coming soon.... </p>
+<h1>Welcome to Anime-Rec! The place for all you anime recommendation needs!</h1>
+<h3 id="interests">Your current interests are: <%= @interests %></h3>
+<% if flash[:notice] %>
+   <p id="notice"><%= flash[:notice] %></p>
+<% end %>
+<% if flash[:error] %>
+   <p id="error"><%= flash[:error] %></p>
+<% end %>
+<div>
+   <%= render 'form' %>
+</div>
+<div id="anime_list">
+ <ol>
+  <%= render @animes %>
+ </ol>
+</div>
