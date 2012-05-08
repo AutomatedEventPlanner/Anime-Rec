@@ -8,8 +8,13 @@ AnimeRec::Application.routes.draw do
   get "static_pages/recommend"
 
   resources :users
+  match 'signup', to: 'users#new'
 
   resources :animes
+
+  resources :sessions, only: [:new, :create, :destroy]
+  match 'signin', to: 'sessions#new'
+  match 'signout', to: 'sessions#destroy', via: :delete
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

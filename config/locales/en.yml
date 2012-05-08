@@ -6,3 +6,4 @@ en:
     attributes:
       user:
         password_digest: "Password"
+        name: "User name"
