@@ -9,6 +9,7 @@
 #  updated_at      :datetime        not null
 #  password_digest :string(255)
 #  interests       :text
+#  remember_token  :string(255)
 #
 
 class User < ActiveRecord::Base

@@ -1,5 +1,19 @@
+<div id="approval_form">
+   <% if signed_in? %>
+       <% if @anime.approved? %>
+            <%= button_to "Reject", animes_reject(@anime), method: :put, form_class: "btn btn-danger" %>
+       <% else %>
+            <%= button_to "Approve", animes_approve(@anime), method: :put, form_class: "btn btn-primary" %>
+       <% end %>
+   <% end %>
+</div>
+
 <h1><%= @anime.name %></h1>
 <p><%= @anime.description %></p>
 <h3><%= @anime.rating %></h3>
 <h3><%= @anime.tags %></h3>
-<%= link_to "Update Anime Info", edit_anime_path(@anime) %>
+<div id="update_anime">
+<% if signed_in? && @anime.approved? %>
+  <%= link_to "Update Anime Info", edit_anime_path(@anime) %>
+<% end %>
+</div>

@@ -6,8 +6,10 @@
         <ul class="nav pull-right">
           <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "Help", help_path %></li>
+          <li><%= link_to "Anime List", animes_path %></li>
           <% if signed_in? %>
             <li><%= link_to "Users", '#' %></li>
+            <li><%= link_to "Add New Anime Entry", new_anime_path %></li>
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 Account 
