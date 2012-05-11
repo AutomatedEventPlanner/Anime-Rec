@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  before_filter :signed_in_user, only: [:edit, :update]
+  before_filter :signed_in_user, only: [:index, :edit, :update, :destroy]
+  before_filter :correct_user, only: [:edit, :update]
+  before_filter :admin_user, only: :destroy
 
   # GET /users
   # GET /users.json
@@ -63,6 +65,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
+        sign_in @user
         format.html { redirect_to @user, success: 'User was successfully updated.' }
         format.json { head :no_content }
       else
@@ -86,7 +89,19 @@ class UsersController < ApplicationController
 
   private 
   
+  def admin_user
+    redirect_to nope_path, flash: {error: 'Access denied. Gotta say the magic word.'} unless current_user.admin?
+  end
+  
   def signed_in_user
-    redirect_to signin_path, notice: 'R u dodgin? Gotta sign in first to do that.' unless signed_in?
+    unless signed_in?
+      store_location
+      redirect_to signin_path, notice: 'R u dodgin? Gotta sign in first to do that.' 
+    end
+  end
+
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to @user, notice: 'No No. U no touch.' unless current_user?(@user)
   end
 end

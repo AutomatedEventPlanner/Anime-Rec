@@ -5,6 +5,9 @@ AnimeRec::Application.routes.draw do
   get "static_pages/help"
   match 'help', :to => 'static_pages#help'
 
+  get "static_pages/nope"
+  match 'nope', to: 'static_pages#nope'
+
   get "static_pages/recommend"
 
   resources :users
