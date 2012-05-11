@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_filter :signed_in_user, only: [:edit, :update]
+
   # GET /users
   # GET /users.json
   def index
@@ -61,7 +63,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, success: 'User was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -80,5 +82,11 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url }
       format.json { head :no_content }
     end
+  end
+
+  private 
+  
+  def signed_in_user
+    redirect_to signin_path, notice: 'R u dodgin? Gotta sign in first to do that.' unless signed_in?
   end
 end
