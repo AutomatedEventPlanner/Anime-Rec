@@ -15,5 +15,6 @@ end
 #  password_digest :string(255)
 #  interests       :text
 #  remember_token  :string(255)
+#  admin           :boolean         default(FALSE)
 #
 
