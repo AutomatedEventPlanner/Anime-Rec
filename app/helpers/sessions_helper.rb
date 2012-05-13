@@ -34,6 +34,22 @@ module SessionsHelper
     session[:return_to] =  request.fullpath
   end
 
+  def admin_user
+    redirect_to nope_path, flash: {error: 'Access denied. Gotta say the magic word.'} unless current_user.admin?
+  end
+  
+  def signed_in_user
+    unless signed_in?
+      store_location
+      redirect_to signin_path, notice: 'R u dodgin? Gotta sign in first to do that.' 
+    end
+  end
+
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to @user, notice: 'No No. U no touch.' unless current_user?(@user)
+  end
+
   private
 
     def user_from_remember_token

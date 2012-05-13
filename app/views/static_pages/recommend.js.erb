@@ -1,4 +1,2 @@
-$("#anime_list").html("<ol><%= escape_javascript(render(@animes)) %></ol>")
+$("#anime_list").html("<ol><%= escape_javascript(render(partial: 'shared/anime', collection: @animes)) %></ol>")
 $("#interests").html("Your current interests are: <%= @interests %>")
-$("#notice").html("")
-$("#error").html("")

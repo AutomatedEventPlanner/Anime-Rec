@@ -14,8 +14,8 @@ AnimeRec::Application.routes.draw do
   match 'signup', to: 'users#new'
 
   resources :animes
-  put "animes/approve"
-  put "animes/reject"
+  match 'animes/approve/:id', to: 'animes#approve', via: :put, as: :approve_anime
+  match 'animes/reject/:id', to: 'animes#reject', via: :put, as: :reject_anime
 
   resources :sessions, only: [:new, :create, :destroy]
   match 'signin', to: 'sessions#new'

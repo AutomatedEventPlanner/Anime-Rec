@@ -19,6 +19,10 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
 
+    @interests = @user.interests
+    arr = Anime.all.keep_if {|a| a.recScore(@interests) >= 50 && a.approved? }
+    @animes = arr.sort! {|a,b| b.recScore(@interests) <=> a.recScore(@interests) }
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
@@ -85,23 +89,5 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url }
       format.json { head :no_content }
     end
-  end
-
-  private 
-  
-  def admin_user
-    redirect_to nope_path, flash: {error: 'Access denied. Gotta say the magic word.'} unless current_user.admin?
-  end
-  
-  def signed_in_user
-    unless signed_in?
-      store_location
-      redirect_to signin_path, notice: 'R u dodgin? Gotta sign in first to do that.' 
-    end
-  end
-
-  def correct_user
-    @user = User.find(params[:id])
-    redirect_to @user, notice: 'No No. U no touch.' unless current_user?(@user)
   end
 end

@@ -13,4 +13,11 @@
   <%= @user.interests %>
 </p>
 
+<p>Anime Reccomendations</p>
+<div id="anime_list">
+ <ol>
+  <%= render partial: 'shared/anime', collection: @animes %>
+ </ol>
+</div>
+
 <%= link_to 'Back', users_path %>

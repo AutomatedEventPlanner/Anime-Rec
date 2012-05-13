@@ -1,5 +1,7 @@
 class AnimesController < ApplicationController
   before_filter :signed_in_user, only: [:new, :create, :edit, :update, :destroy, :approve, :reject]
+  before_filter :approval_check, only: [:edit, :update]
+  before_filter :admin_user, only: [:destroy, :approve, :reject]
 
   def index
      @animes = Anime.paginate(page: params[:page])
@@ -43,14 +45,32 @@ class AnimesController < ApplicationController
   end
 
   def approve
+      @anime = Anime.find(params[:id])
+      @anime.toggle!(:approved)
+
+      respond_to do |format|
+           format.html { render 'show' }
+           format.js
+      end
   end
 
   def reject
+      @anime = Anime.find(params[:id])
+      @anime.toggle!(:approved)
+
+      respond_to do |format|
+           format.html { render 'show' }
+           format.js
+      end
   end
+
 
   private
 
-     def signed_in_user
-          redirect_to signin_path, notice: "You need to sign in to have permission for this task." unless signed_in?
-     end
+  def approval_check
+       @anime = Anime.find(params[:id])
+       if !@anime.approved?
+           redirect_to nope_path, notice: "This anime is not approved and cant't be updated by non-admins." unless current_user.admin?
+       end
+  end
 end
