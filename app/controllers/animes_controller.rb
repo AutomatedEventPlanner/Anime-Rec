@@ -1,4 +1,6 @@
 class AnimesController < ApplicationController
+  before_filter :signed_in_user, only: [:new, :create, :edit, :update, :destroy, :approve, :reject]
+
   def index
      @animes = Anime.paginate(page: params[:page])
   end
@@ -39,4 +41,16 @@ class AnimesController < ApplicationController
       Anime.find(params[:id]).destroy
       redirect_to animes_path
   end
+
+  def approve
+  end
+
+  def reject
+  end
+
+  private
+
+     def signed_in_user
+          redirect_to signin_path, notice: "You need to sign in to have permission for this task." unless signed_in?
+     end
 end

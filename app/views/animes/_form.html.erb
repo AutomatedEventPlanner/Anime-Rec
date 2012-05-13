@@ -1,4 +1,17 @@
+ <% if @anime.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@anime.errors.count, "error") %> prohibited this anime from being created or updated.</h2>
+
+      <ul>
+      <% @anime.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
 <%= form_for(@anime) do |f| %>
+   
    <%= f.label :name, "Name of Anime" %>
    <%= f.text_field :name %>
 
