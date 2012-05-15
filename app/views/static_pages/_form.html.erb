@@ -1,5 +1,5 @@
 <%= form_tag({controller: "static_pages", action: "recommend"}, method: "get", remote: true) do %>
-  <%= label_tag(:interests, "Enter interests here. Separate interests with a pipe(|).") %>
+  <%= label_tag(:interests, "Enter interests here. Separate interests with a pipe \"|\".") %>
   <%= text_field_tag(:interests) %>
   <%= submit_tag("Recommend") %> 
 <% end %>
