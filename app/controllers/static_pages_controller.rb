@@ -16,6 +16,7 @@ class StaticPagesController < ApplicationController
   end
 
   def help
+    @location = request.location
   end
 
   def recommend
